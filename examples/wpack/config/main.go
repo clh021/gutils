@@ -13,10 +13,6 @@ type Conf struct {
 	Port              int    `mapstructure:"port"`
 }
 
-var (
-	Config = new(Conf)
-)
-
 func main() {
 	var conf Conf
 	err := config.Load(&conf)
