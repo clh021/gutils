@@ -14,6 +14,7 @@ import (
 //go:generate mkdir -p assets/dist
 //go:generate cp -n assets_gen_tpl/index.html assets/dist/index.html
 //go:generate cp -rn assets_gen_tpl/assets assets/dist/
+//go:generate touch assets/dist/.gitkeep
 
 //go:embed assets/dist/*
 var embedFS_web embed.FS
