@@ -1,0 +1,2 @@
+port: 8080
+prometheus_address: http://prometheus:9090
