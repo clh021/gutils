@@ -15,7 +15,7 @@ type Conf struct {
 
 func main() {
 	var conf Conf
-	err := config.Load(&conf)
+	err := config.Load(&conf, []string{"."}, "config", "yaml")
 	if err != nil {
 		fmt.Printf("Failed to load config: %v\n", err)
 		return

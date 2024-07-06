@@ -11,10 +11,17 @@ import (
 )
 
 // Load 初始化并加载配置
-func Load(Config interface{}) error {
-	viper.SetConfigName("config") // 配置文件名（无扩展名）
-	viper.SetConfigType("yaml")   // 假设配置文件是 YAML 格式
-	viper.AddConfigPath(".")      // 查找配置文件的路径
+// params:
+// Config 配置结构体
+// paths 配置文件路径 eg:[".","config","conf"]
+// cname 配置文件名 eg:"config"
+// ctype 配置文件类型 eg:"yaml"
+func Load(Config interface{}, paths []string, cname string, ctype string) error {
+	viper.SetConfigName(cname) // 配置文件名（无扩展名）
+	viper.SetConfigType(ctype)   // 假设配置文件是 YAML 格式
+	for _, p := range paths {
+		viper.AddConfigPath(p)      // 查找配置文件的路径
+	}
 	viper.AddConfigPath(exec.GetProgramPath())
 
 	// 读取配置文件
