@@ -13,9 +13,11 @@ func testEncode() {
 		log.Println("Utf8ToGbk: ", err)
 	}
 	log.Println("gbkStr: ", gbkStr)
+	log.Println("gbkStr: ", string(gbkStr))
 	utf8Byte, err := strutil.GbkToUtf8(gbkStr)
 	if err != nil {
 		log.Println("GbkToUtf8: ", err)
 	}
+	log.Println("utf8Str: ", utf8Byte)
 	log.Println("utf8Str: ", string(utf8Byte))
 }
