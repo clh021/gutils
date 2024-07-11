@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/clh021/gutils/ufunc/exec"
+	"github.com/clh021/gutils/ufunc/runtimehelpers"
 	"github.com/fsnotify/fsnotify"
 	"github.com/spf13/viper"
 )
@@ -39,7 +39,7 @@ func Load(Config interface{}, opts *LoadOpts) (string, error) {
 	for _, p := range opts.Paths {
 		viper.AddConfigPath(p) // 查找配置文件的路径
 	}
-	viper.AddConfigPath(exec.GetProgramPath())
+	viper.AddConfigPath(runtimehelpers.GetProgramPath())
 
 	confPath := ""
 
