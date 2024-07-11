@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/clh021/gutils/ufunc/exec"
+	"github.com/clh021/gutils/ufunc/runtimehelpers"
 
 	"github.com/fsnotify/fsnotify"
 	"github.com/spf13/viper"
@@ -15,7 +15,7 @@ func Load(Config interface{}) error {
 	viper.SetConfigName("config") // 配置文件名（无扩展名）
 	viper.SetConfigType("yaml")   // 假设配置文件是 YAML 格式
 	viper.AddConfigPath(".")      // 查找配置文件的路径
-	viper.AddConfigPath(exec.GetProgramPath())
+	viper.AddConfigPath(runtimehelpers.GetProgramPath())
 
 	// 读取配置文件
 	if err := viper.ReadInConfig(); err != nil {

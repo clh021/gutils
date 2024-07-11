@@ -1,4 +1,4 @@
-package exec
+package runtimehelpers
 
 import (
 	"os"
@@ -16,6 +16,5 @@ func GetProgramPath() string {
 	if err != nil {
 		panic(err)
 	}
-	// fmt.Println("exReal: ", exReal)
 	return filepath.Dir(exReal)
 }
