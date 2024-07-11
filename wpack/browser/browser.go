@@ -10,7 +10,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/clh021/gutils/ufunc/runtimehelpers"
+	"github.com/clh021/gutils/ufunc/envutil"
 )
 
 type ConfigWithLock struct {
@@ -24,7 +24,7 @@ func GetBrowsers() *[]BrowserItem {
 	items := filterConf(getConf())
 	confWithLock := &ConfigWithLock{Items: items, AgentGetCnt: 0, ItemCnt: len(items)}
 
-	port, err := runtimehelpers.GetFreePort()
+	port, err := envutil.GetFreePort()
 	if err != nil {
 		log.Fatalln(err)
 	}
