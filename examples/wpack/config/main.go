@@ -15,10 +15,12 @@ type Conf struct {
 
 func main() {
 	var conf Conf
-	err := config.Load(&conf)
+	confPath, err := config.Load(&conf, &config.LoadOpts{})
 	if err != nil {
 		fmt.Printf("Failed to load config: %v\n", err)
 		return
+	} else {
+		fmt.Printf("Loaded config from %s\n", confPath)
 	}
 
 	// 使用 spew.Dump 打印配置结构体，它提供了更详细的输出
