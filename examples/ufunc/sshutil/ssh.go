@@ -7,15 +7,16 @@ import (
 )
 
 func testSsh() {
-	stdOut, err := sshutil.RemoteRun("127.0.0.1", "8022", "root", "root", "ip a")
+	stdOut, stdErr, err := sshutil.RemoteRun("127.0.0.1", "8022", "root", "root", "ip a")
 	if err != nil {
 		log.Println(err)
 	}
 	log.Println("RemoteRun stdOut: ", stdOut)
+	log.Println("RemoteRun stdErr: ", stdErr)
 
 	log.Println("----------------------")
 
-	stdOut, stdErr, err := sshutil.RunScript("./test.sh", "arg1", "arg2")
+	stdOut, stdErr, err = sshutil.RunScript("./test.sh", "arg1", "arg2")
 	if err != nil {
 		log.Println("RunScript err: ", err)
 	}

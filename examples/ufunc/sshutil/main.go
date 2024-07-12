@@ -1,8 +1,6 @@
 package main
 
-import (
-	"log"
-)
+import "log"
 
 func main() {
 	log.Println("---------------------- test ssh.go")
@@ -10,4 +8,10 @@ func main() {
 
 	log.Println("---------------------- test scp.go")
 	testScp()
+
+	log.Println("---------------------- test ssh-client.go")
+	testSshClient()
+
+	log.Println("---------------------- test scp-client.go")
+	testScpClient()
 }

@@ -24,20 +24,13 @@ func GetSshClient(ip string, port string, user string, password string) (*ssh.Cl
 }
 
 // RemoteRun 在远程主机上执行脚本，并返回执行结果
-func RemoteRun(ip string, port string, user string, password string, cmd string) (string, error) {
-	client, err := GetSshClient(ip, port, user, password)
+func RemoteRun(ip string, port string, user string, password string, cmd string) (string, string, error) {
+	client, err := NewSshClient(ip, port, user, password)
 	if err != nil {
-		return "", err
+		return "", "", err
 	}
-	session, err := client.NewSession()
-	if err != nil {
-		return "", err
-	}
-	defer session.Close()
-	var b bytes.Buffer
-	session.Stdout = &b
-	err = session.Run(cmd)
-	return b.String(), err
+	defer client.Close()
+	return client.Run(cmd)
 }
 
 func RunScript(scriptFile string, args ...string) (string, string, error) {
@@ -46,9 +39,9 @@ func RunScript(scriptFile string, args ...string) (string, string, error) {
 	}
 	cmd := exec.Command(scriptFile, args...)
 	var stdout bytes.Buffer
-    var stderr bytes.Buffer
-	    cmd.Stdout = &stdout
-    cmd.Stderr = &stderr
-		err := cmd.Run()
-		return stdout.String(), stderr.String(), err
+	var stderr bytes.Buffer
+	cmd.Stdout = &stdout
+	cmd.Stderr = &stderr
+	err := cmd.Run()
+	return stdout.String(), stderr.String(), err
 }

@@ -29,15 +29,17 @@ func testScp() {
 	if err != nil {
 		log.Println(err)
 	}
-	stdOut, err = sshutil.RemoteRun("127.0.0.1", "8022", "root", "root", "tree /tmp")
+	stdOut, stdErr, err = sshutil.RemoteRun("127.0.0.1", "8022", "root", "root", "tree /tmp")
 	if err != nil {
 		log.Println(err)
 	}
 	log.Println("CopyToRemote test files stdOut: ", stdOut)
+	log.Println("CopyToRemote test files stdErr: ", stdErr)
 	log.Println("----------------------")
-	stdOut, err = sshutil.RemoteRun("127.0.0.1", "8022", "root", "root", "tree /root")
+	stdOut, stdErr, err = sshutil.RemoteRun("127.0.0.1", "8022", "root", "root", "tree /root")
 	if err != nil {
 		log.Println(err)
 	}
 	log.Println("CopyToRemote test dirs stdOut: ", stdOut)
+	log.Println("CopyToRemote test dirs stdErr: ", stdErr)
 }
