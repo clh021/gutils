@@ -32,23 +32,38 @@ func testSshClient() {
 		log.Println("isFile: /root/testDir/testFile :", isFile)
 	}
 	if isDir, err := client.IsDir("/root/testDir"); err != nil {
-		log.Println("SshClient Run err: ", err)
+		log.Println("IsDir err: ", err)
 	} else {
 		log.Println("isDir: /root/testDir :", isDir)
 	}
 	if isFile, err := client.IsFile("/root/testDir/testFile7777"); err != nil {
-		log.Println("SshClient Run err: ", err)
+		log.Println("IsFile err: ", err)
 	} else {
 		log.Println("isFile: /root/testDir/testFile :", isFile)
 	}
 	if isDir, err := client.IsDir("/root/testDir7777"); err != nil {
-		log.Println("SshClient Run err: ", err)
+		log.Println("IsDir err: ", err)
 	} else {
 		log.Println("isDir: /root/testDir :", isDir)
 	}
-	if isSshDRunning, err := client.IsRunning("sshd"); err != nil {
-		log.Println("SshClient Run err: ", err)
+	if isRunning, err := client.IsRunning("sshd"); err != nil {
+		log.Println("isRunning err: ", err)
 	} else {
-		log.Println("isSshDRunning: ", isSshDRunning)
+		log.Println("isRunning : sshd: ", isRunning)
+	}
+	if cmdPath, err := client.FindCmdPath("sshd"); err != nil {
+		log.Println("FindCmdPath err: ", err)
+	} else {
+		log.Println("FindCmdPath : sshd: ", cmdPath)
+	}
+	if cmdPath, err := client.FindCmdPath("ash"); err != nil {
+		log.Println("FindCmdPath err: ", err)
+	} else {
+		log.Println("FindCmdPath : ash: ", cmdPath)
+	}
+	if cmdPath, err := client.FindCmdPath("bash"); err != nil {
+		log.Println("FindCmdPath err: ", err)
+	} else {
+		log.Println("FindCmdPath : bash: ", cmdPath)
 	}
 }

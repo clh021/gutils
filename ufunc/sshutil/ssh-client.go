@@ -70,6 +70,21 @@ func (c *SshClient) IsDir(path string) (bool, error) {
 	return true, nil // 目录存在且是目录
 }
 
+// FindCmdPath 在远程服务器上查找指定命令的完整路径
+// 也用来检查远程服务器上是否存在指定的命令
+func (c *SshClient) FindCmdPath(cmdName string) (string, error) {
+	stdout, _, err := c.Run(fmt.Sprintf("command -v %s", cmdName))
+	if err != nil {
+		if exitErr, ok := err.(*ssh.ExitError); ok {
+			if exitErr.ExitStatus() == 127 {
+				return "", fmt.Errorf("command `%s` not found", cmdName)
+			}
+		}
+		return "", err
+	}
+	return strings.TrimSpace(stdout), nil
+}
+
 // IsRunning 检查远程服务器上是否有指定名称的进程正在运行
 func (c *SshClient) IsRunning(processName string) (bool, error) {
 	stdout, _, err := c.Run(fmt.Sprintf("pgrep %s", processName))
