@@ -9,6 +9,7 @@ import (
 )
 
 func testScpClient() {
+	nowTime := time.Now().Format("20060102150405")
 	client, err := sshutil.NewScpClient("127.0.0.1", "8022", "root", "root")
 	if err != nil {
 		log.Println("ScpClient RemoteRunScript err: ", err)
@@ -23,14 +24,14 @@ func testScpClient() {
 	log.Println("ScpClient RunScript stdErr: ", stdErr)
 	log.Println("----------------------")
 
-	err = client.Copy("./test.sh", fmt.Sprintf("%s%s", "/tmp/test.sh", time.Now().Format("20060102150405")))
+	err = client.Copy("./test.sh", fmt.Sprintf("%s%s", "/tmp/test.sh", nowTime))
 	if err != nil {
 		log.Println("ScpClient Copy file err: ", err)
 	} else {
 		log.Println("ScpClient Copy file ok: ", err)
 	}
 
-	err = client.Copy("./testDir", fmt.Sprintf("%s%s", "/root/testCopyDir", time.Now().Format("20060102150405")))
+	err = client.Copy("./testDir", fmt.Sprintf("%s%s", "/root/testCopyDir", nowTime))
 	if err != nil {
 		log.Println("ScpClient Copy dir err:", err)
 	} else {
